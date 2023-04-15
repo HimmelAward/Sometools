@@ -36,7 +36,7 @@ def show(results):
         if result != None:
             print("{} is ok ".format(result))
 
-def main(url,type = 'php',threads = 5, headers = {}):
+def call_scanner(url,type = 'php',threads = 5, headers = {}):
     results = []
     pool = ThreadPoolExecutor(max_workers=threads)
 
@@ -47,6 +47,13 @@ def main(url,type = 'php',threads = 5, headers = {}):
         results.append(res.result())
     show(results)
 
+def main(args): 
+    if args.url and args.type and args.threads:
+        if args.headers:
+            main(args.url,args.type,args.threads,json.loads(args.headers))
+        else:
+            main(args.url,args.type,args.threads)
+
 if __name__ == "__main__":
 
     arg = argparse.ArgumentParser(description="this is a simple scanner of web")
@@ -55,9 +62,6 @@ if __name__ == "__main__":
     arg.add_argument('--threads',type=int,default=5)
     arg.add_argument('--headers',type=str,)
     args = arg.parse_args()
-
-    if args.url and args.type and args.threads:
-        if args.headers:
-            main(args.url,args.type,args.threads,json.loads(args.headers))
-        else:
-            main(args.url,args.type,args.threads)
+    
+    main(args)
+    
