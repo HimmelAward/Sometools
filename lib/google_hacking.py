@@ -93,21 +93,8 @@ def call_sqlmap(real_urls,sqlmap):
     for url in real_urls:
         cmd = cmd.format(url)
         os.system(cmd)
-
-if __name__ == "__main__":
-
-    arg = argparse.ArgumentParser(description="this is a auto_google_hack website get tools")
-    arg.add_argument('--search_type',type=str,default="baidu")
-    arg.add_argument('--search_key',type=str,)
-    arg.add_argument('--numbers', type=int, default=10)
-    arg.add_argument('--threads',type=int,default=5)
-    arg.add_argument('--output_file',type=str,default="output.txt")
-    arg.add_argument('--delay', type=int, default=3)
-    arg.add_argument('--show',type = bool,default=False)
-    arg.add_argument('--auto_use_sqlmap',type=bool,default=False)
-    arg.add_argument('--sqlmap_path',type=str,default='./sqlmap')
-    args = arg.parse_args()
-
+        
+def main(args):
     if args.auto_use_sqlmap == True:
         assert not check_sql_map(args.sqlmap_path),"无法找到sqlmap"
 
@@ -129,4 +116,21 @@ if __name__ == "__main__":
                 urls.append(line.split("\n"))
         call_sqlmap(urls,args.sqlmap_path)
 
+
+if __name__ == "__main__":
+
+    arg = argparse.ArgumentParser(description="this is a auto_google_hack website get tools")
+    arg.add_argument('--search_type',type=str,default="baidu")
+    arg.add_argument('--search_key',type=str,)
+    arg.add_argument('--numbers', type=int, default=10)
+    arg.add_argument('--threads',type=int,default=5)
+    arg.add_argument('--output_file',type=str,default="output.txt")
+    arg.add_argument('--delay', type=int, default=3)
+    arg.add_argument('--show',type = bool,default=False)
+    arg.add_argument('--auto_use_sqlmap',type=bool,default=False)
+    arg.add_argument('--sqlmap_path',type=str,default='./sqlmap')
+    args = arg.parse_args()
+    
+    main(args)
+   
 
