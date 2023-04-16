@@ -4,7 +4,6 @@
 在config_run 自定义需要的脚本的参数，脚本放于lib
 ### 目前支持的脚本
 -webscanner<br>
-args:<br>
 &#8195;url:目标网站<br>
 &#8195;type:网站脚本类型默认php<br>
 &#8195;threads:线程<br>
